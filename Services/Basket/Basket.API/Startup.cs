@@ -1,6 +1,9 @@
+using System.Reflection;
+using Basket.Application.Handlers;
 using Basket.Core.Repositories;
 using Basket.Infrastructure.Repository;
 using HealthChecks.UI.Client;
+using MediatR;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
 
@@ -17,14 +20,16 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddControllers();
+        services.AddApiVersioning();
         //Redis settings
         services.AddStackExchangeRedisCache(options =>
         {
             options.Configuration = Configuration.GetValue<string>("CacheSettings:ConnectionString");
         });
+        services.AddMediatR(typeof(CreateShoppingCartCommandHandler).GetTypeInfo().Assembly);
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddAutoMapper(typeof(Startup));
-        services.AddControllers();
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket.API", Version = "v1" });
