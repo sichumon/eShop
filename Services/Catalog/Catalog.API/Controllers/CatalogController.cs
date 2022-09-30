@@ -20,7 +20,7 @@ public class CatalogController : ApiController
     
     [HttpGet]
     [Route("[action]/{id}", Name = "GetProductById")]
-    [ProducesResponseType(typeof(IList<Product>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(IList<ProductResponse>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IList<ProductResponse>>> GetProductById(string id)
     {
         var query = new GetProductByIdQuery(id);
@@ -40,7 +40,7 @@ public class CatalogController : ApiController
     
     [HttpGet]
     [Route("[action]/{category}", Name = "GetProductsByCategoryName")]
-    [ProducesResponseType(typeof(IList<Product>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(IList<ProductResponse>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IList<ProductResponse>>> GetProductsByCategoryName(string category)
     {
         var query = new GetProductByCategoryQuery(category);
@@ -50,7 +50,7 @@ public class CatalogController : ApiController
 
     [HttpPost]
     [Route("CreateProduct")]
-    [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<ProductResponse>> CreateProduct([FromBody] CreateProductCommand productCommand)
     {
         var result = await _mediator.Send(productCommand);
@@ -58,7 +58,7 @@ public class CatalogController : ApiController
     }
     [HttpPut]
     [Route("UpdateProduct")]
-    [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
     //IActionResult can be used, if we don't want to return any exclusive type
     //This will return only 200 success result
     public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductCommand product)
@@ -66,7 +66,7 @@ public class CatalogController : ApiController
         return Ok(await _mediator.Send(product));
     }
     [HttpDelete("{id}", Name = "DeleteProduct")]
-    [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> DeleteProductById(string id)
     {
         var query = new DeleteProductByIdQuery(id);
