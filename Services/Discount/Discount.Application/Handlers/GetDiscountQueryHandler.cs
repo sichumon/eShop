@@ -25,7 +25,16 @@ public class GetDiscountQueryHandler : IRequestHandler<GetDiscountQuery, CouponM
             throw new RpcException(new Status(StatusCode.NotFound,
                 $"Discount with ProductName={request.ProductName} is not found."));
         }
-        var couponModel = _mapper.Map<CouponModel>(coupon);
+
+        var couponModel = new CouponModel
+        {
+            Id = coupon.Id,
+            Amount = coupon.Amount,
+            Description = coupon.Description,
+            ProductName = coupon.ProductName
+        };
+        //TODO Need to check mapping
+       // var couponModel = _mapper.Map<CouponModel>(coupon);
         return couponModel;
 
     }
