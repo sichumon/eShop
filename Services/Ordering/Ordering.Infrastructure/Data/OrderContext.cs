@@ -6,24 +6,12 @@ namespace Ordering.Infrastructure.Data;
 
 public class OrderContext : DbContext
 {
-    // public OrderContext():base()
-    // {
-    //     
-    // }
     public OrderContext(DbContextOptions<OrderContext> options): base(options)
     {
             
     }
 
     public DbSet<Order> Orders { get; set; }
-
-    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    // {
-    //     if (!optionsBuilder.IsConfigured)
-    //     {
-    //         optionsBuilder.UseSqlServer("OrderingConnectionString");
-    //     }
-    // }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
@@ -34,8 +22,14 @@ public class OrderContext : DbContext
                 case EntityState.Added:
                     entry.Entity.CreatedDate = DateTime.Now;
                     entry.Entity.CreatedBy = "rahul"; //This is hardcoded as Identity server is not implemented, hence no user profile maintained
+                    //TODO Need to check optional use case
+                    entry.Entity.LastModifiedBy = "rahul";
+                    entry.Entity.LastModifiedDate = DateTime.Now;
                     break;
                 case EntityState.Modified:
+                    entry.Entity.CreatedDate = DateTime.Now;
+                    entry.Entity.CreatedBy = "rahul"; //This is hardcoded as Identity server is not implemented, hence no user profile maintained
+                    //TODO Need to check optional use case
                     entry.Entity.LastModifiedDate = DateTime.Now;
                     entry.Entity.LastModifiedBy = "rahul";
                     break;

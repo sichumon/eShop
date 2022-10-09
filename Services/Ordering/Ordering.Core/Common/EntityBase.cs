@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Ordering.Domain.Common;
 
 //This will serve as common fields for domain
@@ -6,8 +8,10 @@ public abstract class EntityBase
 {
     //Protected set is made to use in the derived classes
     public int Id { get; protected set; }
+    [AllowNull]
     public string CreatedBy { get; set; }
     public DateTime CreatedDate { get; set; }
+    [AllowNull]
     public string LastModifiedBy { get; set; }
     public DateTime? LastModifiedDate { get; set; }
 }

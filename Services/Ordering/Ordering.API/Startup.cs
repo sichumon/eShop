@@ -2,6 +2,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
 using Ordering.Application.Extensions;
+using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.Extensions;
 
 namespace Ordering.API;
@@ -19,10 +20,13 @@ public class Startup
         services.AddInfraServices(Configuration);
         services.AddAutoMapper(typeof(Startup));
         services.AddControllers();
+        services.AddApiVersioning();
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ordering.API", Version = "v1" });
         });
+        services.AddHealthChecks().Services.AddDbContext<OrderContext>();
+
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
