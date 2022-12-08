@@ -25,7 +25,7 @@ public class OrderContextSeed
                 UserName = "rahul", 
                 FirstName = "Rahul",
                 LastName = "Sahay",
-                EmailAddress = "rahulsahay19@hotmail.com",
+                EmailAddress = "rahulsahay@eshop.net",
                 AddressLine = "Bangalore",
                 Country = "India",
                 State = "KA",
