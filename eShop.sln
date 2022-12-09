@@ -48,6 +48,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Core", "Services\O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Infrastructure", "Services\Ordering\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{384FCCEB-F87C-43FB-892E-D411DD80BEFC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2DAE7AB2-37D1-4057-800E-2141ED5A36E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Logging", "Infrastructure\Common.Logging\Common.Logging.csproj", "{5A67F04F-C753-4E4B-A2D8-222C60A7C9BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "Infrastructure\EventBus.Messages\EventBus.Messages.csproj", "{66BEF5FE-3A76-4B05-BDC4-B07298963074}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +81,8 @@ Global
 		{13A1141B-0EBA-451E-B9FC-6B3C35D60A92} = {D0D22EB7-3297-4148-B200-6CE362EC36C8}
 		{8E04E917-BFD1-4FCF-929D-8F9597967864} = {D0D22EB7-3297-4148-B200-6CE362EC36C8}
 		{384FCCEB-F87C-43FB-892E-D411DD80BEFC} = {D0D22EB7-3297-4148-B200-6CE362EC36C8}
+		{5A67F04F-C753-4E4B-A2D8-222C60A7C9BB} = {2DAE7AB2-37D1-4057-800E-2141ED5A36E3}
+		{66BEF5FE-3A76-4B05-BDC4-B07298963074} = {2DAE7AB2-37D1-4057-800E-2141ED5A36E3}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DF1AC45D-65A8-46A2-A31B-3B81072574D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -141,5 +149,13 @@ Global
 		{384FCCEB-F87C-43FB-892E-D411DD80BEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{384FCCEB-F87C-43FB-892E-D411DD80BEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{384FCCEB-F87C-43FB-892E-D411DD80BEFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A67F04F-C753-4E4B-A2D8-222C60A7C9BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A67F04F-C753-4E4B-A2D8-222C60A7C9BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A67F04F-C753-4E4B-A2D8-222C60A7C9BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A67F04F-C753-4E4B-A2D8-222C60A7C9BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66BEF5FE-3A76-4B05-BDC4-B07298963074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66BEF5FE-3A76-4B05-BDC4-B07298963074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66BEF5FE-3A76-4B05-BDC4-B07298963074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66BEF5FE-3A76-4B05-BDC4-B07298963074}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
