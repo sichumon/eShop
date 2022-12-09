@@ -24,7 +24,8 @@ public class OrderController: ApiController
         return Ok(orders);
     }
     
-    //This will be triggered from Rabbit MQ. Just for testing purpose
+    //This will be triggered from Rabbit MQ. Just for testing purpose from swagger
+    //Actually this will be processed by BasketCheckoutConsumer class
     [HttpPost(Name = "CheckoutOrder")]
     [ProducesResponseType((int) HttpStatusCode.OK)]
     public async Task<ActionResult<int>> CheckoutOrder([FromBody] CheckoutOrderCommand command)

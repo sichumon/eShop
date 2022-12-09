@@ -4,9 +4,8 @@ using Basket.Application.Handlers;
 using Basket.Core.Repositories;
 using Basket.Infrastructure.Repository;
 using Discount.Grpc.Protos;
-using HealthChecks.UI.Client;
+using MassTransit;
 using MediatR;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
 
 namespace Basket.API;
@@ -40,6 +39,18 @@ public class Startup
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket.API", Version = "v1" });
         });
+        
+        //Mass Transit settings
+        //This will create new service bus using Rabbit MQ
+        //Async communication between basket and ordering via rabbit mq
+        services.AddMassTransit(config =>
+        {
+            config.UsingRabbitMq((ctx, cfg) =>
+            {
+                cfg.Host(Configuration["EventBusSettings:HostAddress"]);
+            });
+        });
+        services.AddMassTransitHostedService();
     }
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
