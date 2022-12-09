@@ -4,11 +4,13 @@ using Ordering.Domain.Entities;
 
 namespace Ordering.Infrastructure.Data;
 
+//TODO Need to Handle null case for order context. Need to apply nullable changes to columns 
+//Without this, while querying data using username, it will return system.data.sqltypes.sqlnullvalueexception data is null exception 
 public class OrderContext : DbContext
 {
     public OrderContext(DbContextOptions<OrderContext> options): base(options)
     {
-            
+        
     }
 
     public DbSet<Order> Orders { get; set; }

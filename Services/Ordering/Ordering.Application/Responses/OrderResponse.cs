@@ -1,4 +1,4 @@
-namespace Ordering.Application.Commands;
+namespace Ordering.Application.Responses;
 
 public class OrderResponse
 {

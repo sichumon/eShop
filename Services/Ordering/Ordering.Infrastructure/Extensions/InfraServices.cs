@@ -13,9 +13,9 @@ public static class InfraServices
         IConfiguration configuration)
     {
         serviceCollection.AddDbContext<OrderContext>(options => options.UseSqlServer(
-            configuration.GetConnectionString("OrderingConnectionString")),ServiceLifetime.Singleton);
+            configuration.GetConnectionString("OrderingConnectionString")));
         serviceCollection.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
-        serviceCollection.AddTransient<IOrderRepository, OrderRepository>();
+        serviceCollection.AddScoped<IOrderRepository, OrderRepository>();
         return serviceCollection;
     }
     

@@ -1,7 +1,7 @@
 using AutoMapper;
 using MediatR;
-using Ordering.Application.Commands;
 using Ordering.Application.Queries;
+using Ordering.Application.Responses;
 using Ordering.Domain.Repositories;
 
 namespace Ordering.Application.Handlers;
