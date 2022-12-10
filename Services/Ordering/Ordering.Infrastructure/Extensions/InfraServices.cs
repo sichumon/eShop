@@ -18,5 +18,4 @@ public static class InfraServices
         serviceCollection.AddScoped<IOrderRepository, OrderRepository>();
         return serviceCollection;
     }
-    
 }

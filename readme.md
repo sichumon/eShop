@@ -9,3 +9,7 @@
 * In the above diagram as we can see before checkout event created basket gets deleted from Redis database.
 
 ![image](https://user-images.githubusercontent.com/3886381/206495928-ccaeadd6-4599-4320-900f-71d69c94e740.png)
+
+## API Gateway Routing Pattern
+
+![image](https://user-images.githubusercontent.com/3886381/206836028-442575f4-c9bd-4387-9cac-aa04e8944fa9.png)
