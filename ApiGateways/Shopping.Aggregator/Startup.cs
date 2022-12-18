@@ -1,3 +1,4 @@
+using Common.Logging;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -17,22 +18,28 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddTransient<DelegateHandler>();
         services.AddControllers();
         services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shopping.Aggregator", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo {Title = "Shopping.Aggregator", Version = "v1"});
         });
         services.AddHttpClient<ICatalogService, CatalogService>(c =>
-            c.BaseAddress = new Uri(Configuration["ApiSettings:CatalogUrl"]));
+                c.BaseAddress = new Uri(Configuration["ApiSettings:CatalogUrl"]))
+            .AddHttpMessageHandler<DelegateHandler>();
         services.AddHttpClient<IBasketService, BasketService>(c =>
-            c.BaseAddress = new Uri(Configuration["ApiSettings:BasketUrl"]));
+                c.BaseAddress = new Uri(Configuration["ApiSettings:BasketUrl"]))
+            .AddHttpMessageHandler<DelegateHandler>();
         services.AddHttpClient<IOrderService, OrderService>(c =>
-            c.BaseAddress = new Uri(Configuration["ApiSettings:OrderingUrl"]));
-        
+                c.BaseAddress = new Uri(Configuration["ApiSettings:OrderingUrl"]))
+            .AddHttpMessageHandler<DelegateHandler>();
         services.AddHealthChecks()
-            .AddUrlGroup(new Uri($"{Configuration["ApiSettings:CatalogUrl"]}/swagger/index.html"), "Catalog.API", HealthStatus.Degraded)
-            .AddUrlGroup(new Uri($"{Configuration["ApiSettings:BasketUrl"]}/swagger/index.html"), "Basket.API", HealthStatus.Degraded)
-            .AddUrlGroup(new Uri($"{Configuration["ApiSettings:OrderingUrl"]}/swagger/index.html"), "Ordering.API", HealthStatus.Degraded);
+            .AddUrlGroup(new Uri($"{Configuration["ApiSettings:CatalogUrl"]}/swagger/index.html"), "Catalog.API",
+                HealthStatus.Degraded)
+            .AddUrlGroup(new Uri($"{Configuration["ApiSettings:BasketUrl"]}/swagger/index.html"), "Basket.API",
+                HealthStatus.Degraded)
+            .AddUrlGroup(new Uri($"{Configuration["ApiSettings:OrderingUrl"]}/swagger/index.html"), "Ordering.API",
+                HealthStatus.Degraded);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -58,5 +65,4 @@ public class Startup
             });
         });
     }
-
 }

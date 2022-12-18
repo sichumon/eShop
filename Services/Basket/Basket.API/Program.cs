@@ -1,3 +1,6 @@
+using Common.Logging;
+using Serilog;
+
 namespace Basket.API;
 
 public class Program
@@ -17,5 +20,6 @@ public class Program
                     options.ActivityTrackingOptions = ActivityTrackingOptions.TraceId | ActivityTrackingOptions.SpanId;
                 });
             })
+            .UseSerilog(SeriLogger.configure)
             .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
 }

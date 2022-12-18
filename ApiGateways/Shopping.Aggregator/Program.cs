@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using Common.Logging;
+using Serilog;
 
 namespace Shopping.Aggregator;
 
@@ -12,14 +14,14 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            // .ConfigureLogging(loggingBuilder =>
-            // {
-            //     loggingBuilder.Configure(options =>
-            //     {
-            //         options.ActivityTrackingOptions = ActivityTrackingOptions.TraceId | ActivityTrackingOptions.SpanId;
-            //     });
-            // })
-            //.UseSerilog(SeriLogger.configure)
+             // .ConfigureLogging(loggingBuilder =>
+             // {
+             //     loggingBuilder.Configure(options =>
+             //     {
+             //         options.ActivityTrackingOptions = ActivityTrackingOptions.TraceId | ActivityTrackingOptions.SpanId;
+             //     });
+             // })
+            .UseSerilog(SeriLogger.configure)
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();

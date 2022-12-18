@@ -1,3 +1,4 @@
+using Common.Logging;
 using Serilog;
 
 namespace Catalog.API
@@ -11,7 +12,7 @@ namespace Catalog.API
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-               // .UseSerilog(SeriLogger.configure)
+                .UseSerilog(SeriLogger.configure)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
