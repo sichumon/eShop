@@ -4,8 +4,11 @@ using Basket.Application.Handlers;
 using Basket.Core.Repositories;
 using Basket.Infrastructure.Repository;
 using Discount.Grpc.Protos;
+using HealthChecks.UI.Client;
 using MassTransit;
 using MediatR;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
 
 namespace Basket.API;
@@ -40,6 +43,9 @@ public class Startup
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket.API", Version = "v1" });
         });
         
+        services.AddHealthChecks()
+            .AddRedis(Configuration["CacheSettings:ConnectionString"], "Redis Health", HealthStatus.Degraded);
+        
         //Mass Transit settings
         //This will create new service bus using Rabbit MQ
         //Async communication between basket and ordering via rabbit mq
@@ -71,11 +77,11 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
-            // endpoints.MapHealthChecks("/health", new HealthCheckOptions()
-            // {
-            //     Predicate = _ => true,
-            //     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            // });
+            endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
         });
     }
 }

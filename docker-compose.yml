@@ -63,9 +63,19 @@ services:
 
   kibana:
       image: docker.elastic.co/kibana/kibana:7.9.2
+      
+  statuscheck:
+    image: ${DOCKER_REGISTRY-}statuscheck
+    build:
+      context: .
+      dockerfile: Client/StatusCheck/Dockerfile
+      
+  jaeger:
+    image: jaegertracing/all-in-one:latest
 volumes:
   mongo_data:
   portainer_data:
   postgres_data:
   pgadmin_data:
   elasticsearch-data:
+  jaeger-data:
