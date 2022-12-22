@@ -19,3 +19,6 @@
 
 ## Status Check 
 ![image](https://user-images.githubusercontent.com/3886381/209166943-3457364f-d2f4-4328-b7e8-43b45e71a7ac.png)
+
+## Tracing using Jaeger
+![image](https://user-images.githubusercontent.com/3886381/209193107-e9e7ab3a-0060-49f9-9a7d-bb81147a4bf3.png)
