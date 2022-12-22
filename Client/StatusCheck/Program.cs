@@ -1,6 +1,31 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using System.Diagnostics;
+using Common.Logging;
+using Serilog;
 
-app.MapGet("/", () => "Hello World!");
+namespace StatusCheck
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Activity.DefaultIdFormat = ActivityIdFormat.W3C;
 
-app.Run();
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureLogging(loggingBuilder =>
+                {
+                    loggingBuilder.Configure(options =>
+                    {
+                        options.ActivityTrackingOptions = ActivityTrackingOptions.TraceId | ActivityTrackingOptions.SpanId;
+                    });
+                })
+                .UseSerilog(SeriLogger.configure)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
+}

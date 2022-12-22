@@ -16,3 +16,6 @@
 
 ## Elastic Search
 ![image](https://user-images.githubusercontent.com/3886381/208603245-44687ec3-629c-4a1d-a7f4-87bcc5baa1f6.png)
+
+## Status Check 
+![image](https://user-images.githubusercontent.com/3886381/209166943-3457364f-d2f4-4328-b7e8-43b45e71a7ac.png)
