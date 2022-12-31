@@ -23,11 +23,16 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
-            - name: DatabaseSettings__ConnectionString
+            - name: CacheSettings__ConnectionString
               valueFrom:
                   configMapKeyRef:
-                    name: mongo-configmap
+                    name: cache-configmap
                     key: connection_string
+            - name: GrpcSettings__DiscountUrl
+              valueFrom:
+                  configMapKeyRef:
+                    name: grpc-configmap
+                    key: DiscountUrl
           resources:
             requests:
               memory: "64Mi"

@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: cache-configmap
 data:
-  connection_string: http://basket-db-service:6379
+  connection_string: basket-db-service:6379

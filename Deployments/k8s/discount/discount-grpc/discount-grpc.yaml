@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: discount-grpc
-          image: rahulsahay19/catalogapi:latest
+          image: rahulsahay19/discountapi:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -26,7 +26,7 @@ spec:
             - name: DatabaseSettings__ConnectionString
               valueFrom:
                   configMapKeyRef:
-                    name: mongo-configmap
+                    name: discount-api-configmap
                     key: connection_string
           resources:
             requests:
@@ -46,6 +46,6 @@ spec:
     app: discount-grpc
   ports:
     - protocol: TCP
-      port: 9000
+      port: 9002
       targetPort: 80
-      nodePort: 31000
+      nodePort: 31002

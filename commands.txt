@@ -3,3 +3,9 @@
 2) http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
 
 3) Enter the token got from 1st step
+
+kubectl apply -f discount-secret.yaml  
+kubectl apply -f discount-api-configmap.yaml
+kubectl apply -f discount-db-pv.yaml
+kubectl apply -f discount-db.yaml  
+kubectl apply -f discount-grpc.yaml 
