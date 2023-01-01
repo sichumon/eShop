@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: discount-postgres-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       component: discount-postgresdb

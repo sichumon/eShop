@@ -1,11 +1,42 @@
 1) kubectl describe secret -n kube-system
 
-2) http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
+2) kubectl proxy
 
-3) Enter the token got from 1st step
+3) http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
 
-kubectl apply -f discount-secret.yaml  
+4) Enter the token got from 1st step
+
+Elastic
+-------------------------------------
+kubectl apply -f elastic-api.yaml
+
+Discount
+-------------------------------------
+kubectl apply -f discount-secret.yaml
+kubectl apply -f discount-db-pv.yaml 
 kubectl apply -f discount-api-configmap.yaml
-kubectl apply -f discount-db-pv.yaml
-kubectl apply -f discount-db.yaml  
-kubectl apply -f discount-grpc.yaml 
+kubectl apply -f discount-db.yaml
+kubectl apply -f discount-grpc.yaml
+
+Basket
+-------------------------------------
+kubectl apply -f cache-configmap.yaml
+kubectl apply -f grpc-configmap.yaml
+kubectl apply -f basket-db.yaml 
+kubectl apply -f basket-eventbus-configmap.yaml 
+kubectl apply -f basket-api.yaml
+
+Catalog
+-------------------------------------
+kubectl apply -f mongo-secret.yaml
+kubectl apply -f mongo-configmap.yaml
+kubectl apply -f catalog-db.yaml 
+kubectl apply -f catalog-api.yaml
+
+Ordering
+-------------------------------------
+kubectl apply -f ordering-secret.yaml
+kubectl apply -f ordering-db-pv.yaml
+kubectl apply -f ordering-db.yaml
+kubectl apply -f ordering-api-configmap.yaml 
+kubectl apply -f ordering-api.yaml 

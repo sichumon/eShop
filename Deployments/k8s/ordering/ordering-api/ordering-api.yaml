@@ -1,48 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: basket-api-deployment
+  name: ordering-api-deployment
   labels:
-    app: basket-api
+    app: ordering-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: basket-api
+      app: ordering-api
   template:
     metadata:
       labels:
-        app: basket-api
+        app: ordering-api
     spec:
       containers:
-        - name: basket-api
-          image: rahulsahay19/basketapi:latest
+        - name: ordering-api
+          image:  rahulsahay19/orderingapi:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
-            - name: CacheSettings__ConnectionString
+              
+            - name: ConnectionStrings__OrderingConnectionString
               valueFrom:
                   configMapKeyRef:
-                    name: cache-configmap
+                    name: ordering-api-configmap
                     key: connection_string
-            - name: GrpcSettings__DiscountUrl
-              valueFrom:
-                  configMapKeyRef:
-                    name: grpc-configmap
-                    key: DiscountUrl
-            - name: EventBusSettings__HostAddress
-              valueFrom:
-                  configMapKeyRef:
-                    name: basket-eventbus-configmap
-                    key: EventBusSetting
             - name: ElasticConfiguration__Uri
               valueFrom:
                   configMapKeyRef:
-                    name: basket-eventbus-configmap
-                    key: ElasticSetting        
+                    name: ordering-api-configmap
+                    key: ElasticSetting      
           resources:
             requests:
               memory: "64Mi"
@@ -50,17 +41,18 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: basket-api-service
+  name: ordering-api-service
 spec:
   type: NodePort
   selector:
-    app: basket-api
+    app: ordering-api
   ports:
     - protocol: TCP
-      port: 9001
+      port: 9003
       targetPort: 80
-      nodePort: 31001
+      nodePort: 31003

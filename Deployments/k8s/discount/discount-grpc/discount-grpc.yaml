@@ -28,6 +28,11 @@ spec:
                   configMapKeyRef:
                     name: discount-api-configmap
                     key: connection_string
+            - name: ElasticConfiguration__Uri
+              valueFrom:
+                  configMapKeyRef:
+                    name: discount-api-configmap
+                    key: ElasticSetting
           resources:
             requests:
               memory: "64Mi"

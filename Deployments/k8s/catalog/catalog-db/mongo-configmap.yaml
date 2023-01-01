@@ -4,3 +4,6 @@ metadata:
   name: mongo-configmap
 data:
   connection_string: mongodb://username:password@mongo-service:27017
+  DatabaseName: CatalogDb
+  CollectionName: Products
+  ElasticSetting: http://elasticsearch:31200

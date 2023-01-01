@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: basket-eventbus-configmap
+data:
+  EventBusSetting: amqp://guest:guest@rabbitmq:5672
+  ElasticSetting: http://elasticsearch:31200

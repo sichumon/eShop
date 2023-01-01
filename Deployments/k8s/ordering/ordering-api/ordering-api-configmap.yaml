@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ordering-api-configmap
+  labels:
+    app: ordering-api
+data:
+  connection_string: Server=ordering-db-service;Port=5432;Database=OrderDb;User Id=sa;Password=Rahul1234567;
+  ElasticSetting: http://elasticsearch:31200

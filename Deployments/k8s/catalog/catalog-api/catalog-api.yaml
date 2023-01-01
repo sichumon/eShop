@@ -28,6 +28,21 @@ spec:
                   configMapKeyRef:
                     name: mongo-configmap
                     key: connection_string
+            - name: DatabaseSettings__DatabaseName
+              valueFrom:
+                  configMapKeyRef:
+                    name: mongo-configmap
+                    key: DatabaseName
+            - name: DatabaseSettings__CollectionName
+              valueFrom:
+                  configMapKeyRef:
+                    name: mongo-configmap
+                    key: CollectionName
+            - name: ElasticConfiguration__Uri
+              valueFrom:
+                  configMapKeyRef:
+                    name: mongo-configmap
+                    key: ElasticSetting
           resources:
             requests:
               memory: "64Mi"
