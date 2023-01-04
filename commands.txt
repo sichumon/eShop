@@ -40,3 +40,48 @@ kubectl apply -f ordering-db-pv.yaml
 kubectl apply -f ordering-db.yaml
 kubectl apply -f ordering-api-configmap.yaml 
 kubectl apply -f ordering-api.yaml 
+
+For Deleting all resources
+kubectl delete all --all
+
+
+//ACR 
+docker tag basketapi:latest eshopacr.azurecr.io/basketapi:v1
+docker push eshopacr.azurecr.io/basketapi:v1
+az acr repository list --name eshopacr --output table
+
+TODO az aks creation command needed
+
+This will merge the aks context with local kube context
+az aks get-credentials --admin --name eshopCluster --resource-group aks-rah-sahay 
+
+//Create Image pull secret for pulling image from ACR
+
+kubectl create secret docker-registry acr-secret --docker-server=eshopacr.azurecr.io --docker-username=eshopacr --docker-password=QkNSi1ykT+u6n7+oJxyoIvfS6kWjPzsLrTS8UgYunm+ACRCjZDrt --docker-email=rahsahay@publicisgroupe.net
+
+kubectl apply -f mongo-secret.yaml
+kubectl apply -f mongo-configmap.yaml
+kubectl apply -f catalog-db.yaml 
+kubectl apply -f catalog-api.yaml
+
+
+AKS dashboard
+TODO 
+
+https://www.linkedin.com/pulse/deploying-rabbitmq-cluster-kubernetes-part-1-darshana-dinushal/ 
+kubectl create ns rabbits
+kubectl create -n rabbits -f rabbit-configmap.yaml
+kubectl create -n rabbits -f rabbit-rbac.yaml
+kubectl get storageclass
+Then replace the storage class name
+kubectl create -n rabbits -f rabbitmq.yaml
+
+kubectl apply -f discount-secret.yaml 
+kubectl apply -f discount-db-pv.yaml  
+kubectl apply -f discount-api-configmap.yaml
+kubectl apply -f discount-db.yaml   
+kubectl apply -f discount-grpc.yaml
+
+kubectl apply -f grpc-configmap.yaml 
+kubectl apply -f cache-configmap.yaml 
+kubectl apply -f basket-db.yaml 

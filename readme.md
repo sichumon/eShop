@@ -22,3 +22,10 @@
 
 ## Tracing using Jaeger
 ![image](https://user-images.githubusercontent.com/3886381/209193107-e9e7ab3a-0060-49f9-9a7d-bb81147a4bf3.png)
+
+## AKS Workloads
+
+![image](https://user-images.githubusercontent.com/3886381/210610955-d817b6e6-7086-42b9-9d88-9adf5ab8852e.png)
+
+## AKS Monitoring
+![image](https://user-images.githubusercontent.com/3886381/210528612-9b8a8211-abc8-4a86-806a-c94d3f0dfb96.png)

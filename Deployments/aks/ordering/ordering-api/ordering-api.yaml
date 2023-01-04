@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ordering-api-deployment
+  labels:
+    app: ordering-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ordering-api
+  template:
+    metadata:
+      labels:
+        app: ordering-api
+    spec:
+      containers:
+        - name: ordering-api
+          image:  eshopacr.azurecr.io/orderingapi:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+              
+            - name: ConnectionStrings__OrderingConnectionString
+              valueFrom:
+                  configMapKeyRef:
+                    name: ordering-api-configmap
+                    key: connection_string
+            - name: ElasticConfiguration__Uri
+              valueFrom:
+                  configMapKeyRef:
+                    name: ordering-api-configmap
+                    key: ElasticSetting      
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+      imagePullSecrets:
+        - name: acr-secret
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ordering-api-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: ordering-api
+  ports:
+    - protocol: TCP
+      port: 80
+      

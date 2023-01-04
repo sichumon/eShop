@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basket-api-deployment
+  labels:
+    app: basket-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: basket-api
+  template:
+    metadata:
+      labels:
+        app: basket-api
+    spec:
+      containers:
+        - name: basket-api
+          image: eshopacr.azurecr.io/basketapi:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: CacheSettings__ConnectionString
+              valueFrom:
+                  configMapKeyRef:
+                    name: cache-configmap
+                    key: connection_string
+            - name: GrpcSettings__DiscountUrl
+              valueFrom:
+                  configMapKeyRef:
+                    name: grpc-configmap
+                    key: DiscountUrl
+            - name: EventBusSettings__HostAddress
+              valueFrom:
+                  configMapKeyRef:
+                    name: basket-eventbus-configmap
+                    key: EventBusSetting
+            - name: ElasticConfiguration__Uri
+              valueFrom:
+                  configMapKeyRef:
+                    name: basket-eventbus-configmap
+                    key: ElasticSetting        
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+      imagePullSecrets:
+        - name: acr-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: basket-api-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: basket-api
+  ports:
+    - protocol: TCP
+      port: 80
