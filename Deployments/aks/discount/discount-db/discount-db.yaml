@@ -36,6 +36,11 @@ spec:
                 secretKeyRef:
                   name: discount-secret
                   key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: discount-api-configmap
+                  key: database
           resources:
             requests:
               memory: "2Gi"
