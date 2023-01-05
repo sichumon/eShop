@@ -1,10 +1,22 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
+# Create the storage class and persistent volumne claim
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
 metadata:
-  name: ordering-db-data-claim
+  name: azure-disk
+provisioner: kubernetes.io/azure-disk
+parameters:
+  storageaccounttype: Standard_LRS
+  kind: Managed
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mssql-data
+  annotations:
+    volume.beta.kubernetes.io/storage-class: azure-disk
 spec:
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 8Gi

@@ -33,7 +33,12 @@ spec:
               valueFrom:
                   configMapKeyRef:
                     name: ordering-api-configmap
-                    key: ElasticSetting      
+                    key: ElasticSetting
+            - name: EventBusSettings__HostAddress
+              valueFrom:
+                  configMapKeyRef:
+                    name: ordering-api-configmap
+                    key: EventBusSettings__HostAddress      
           resources:
             requests:
               memory: "64Mi"

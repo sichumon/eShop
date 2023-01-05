@@ -57,7 +57,7 @@ az aks get-credentials --admin --name eshopCluster --resource-group aks-rah-saha
 
 //Create Image pull secret for pulling image from ACR
 
-kubectl create secret docker-registry acr-secret --docker-server=eshopacr.azurecr.io --docker-username=eshopacr --docker-password=QkNSi1ykT+u6n7+oJxyoIvfS6kWjPzsLrTS8UgYunm+ACRCjZDrt --docker-email=rahsahay@publicisgroupe.net
+kubectl create secret docker-registry acr-secret --docker-server=eshopacr.azurecr.io --docker-username=eshopacr --docker-password=QkNSi1ykT+u6n7+oJxyoIvfS6kWjPzsLrTS8UgYunm+ACRCjZDrt --docker-email=rahulsahay19@gmail.com
 
 kubectl apply -f mongo-secret.yaml
 kubectl apply -f mongo-configmap.yaml
@@ -85,3 +85,7 @@ kubectl apply -f discount-grpc.yaml
 kubectl apply -f grpc-configmap.yaml 
 kubectl apply -f cache-configmap.yaml 
 kubectl apply -f basket-db.yaml 
+
+check https://rajanieshkaushikk.com/2021/02/27/how-to-deploy-sql-server-containers-to-a-kubernetes-cluster-for-high-availability/
+
+kubectl create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="MyC0m9l&xP@ssw0rd"
