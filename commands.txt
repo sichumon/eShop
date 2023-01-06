@@ -91,3 +91,19 @@ check https://rajanieshkaushikk.com/2021/02/27/how-to-deploy-sql-server-containe
 kubectl create secret generic mssql --from-literal=MSSQL_SA_PASSWORD="MyC0m9l&xP@ssw0rd"
 
 kubectl port-forward service/kibana 5602:5601
+
+Istio
+kubectl apply -f 1-istio-init.yaml
+kubectl apply -f 2-istio-minikube.yaml
+kubectl apply -f 3-kiali-secret.yaml
+
+containers running in Istio system
+kubectl get po -n istio-system
+
+Enabling Istio
+kubectl label namespace default istio-injection=enabled
+
+Deleting kiali
+kubectl delete kiali --all --all-namespaces
+helm uninstall --namespace kiali-operator kiali-operator
+kubectl delete crd kialis.kiali.io
