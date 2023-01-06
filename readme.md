@@ -25,7 +25,34 @@
 
 ## AKS Workloads
 
-![image](https://user-images.githubusercontent.com/3886381/210610955-d817b6e6-7086-42b9-9d88-9adf5ab8852e.png)
+![image](https://user-images.githubusercontent.com/3886381/210868687-3ce72999-1187-4826-94f3-14db9d79bde5.png)
 
 ## AKS Monitoring
 ![image](https://user-images.githubusercontent.com/3886381/210528612-9b8a8211-abc8-4a86-806a-c94d3f0dfb96.png)
+
+## Pods Overview Kube Lens
+![image](https://user-images.githubusercontent.com/3886381/210942031-14a2b935-a7f2-48f1-b97d-affe199030fe.png)
+
+![image](https://user-images.githubusercontent.com/3886381/210942401-39084590-7670-4067-956b-772c28f2f508.png)
+
+## Deployments
+
+![image](https://user-images.githubusercontent.com/3886381/210942812-fe244069-5aba-4b48-9c68-9b503b540854.png)
+
+## ConfigMaps
+
+![image](https://user-images.githubusercontent.com/3886381/210943017-97b65ee3-5b70-4d5f-972c-5b75ff92ba7b.png)
+
+## Secrets
+
+![image](https://user-images.githubusercontent.com/3886381/210944092-68c586ff-528e-48f6-81f5-df07fc2bf2d1.png)
+
+## HPA (Horizontal Pods AutoScaler)
+
+![image](https://user-images.githubusercontent.com/3886381/210944313-4f33e12d-dcf2-475c-9bc6-9abb4f56f4a7.png)
+
+## Kibana
+
+kubectl port-forward service/kibana 5602:5601
+
+![image](https://user-images.githubusercontent.com/3886381/210946644-63d6ade6-71f0-458e-a823-632619ba6c11.png)
