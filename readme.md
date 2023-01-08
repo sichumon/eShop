@@ -56,3 +56,36 @@
 kubectl port-forward service/kibana 5602:5601
 
 ![image](https://user-images.githubusercontent.com/3886381/210946644-63d6ade6-71f0-458e-a823-632619ba6c11.png)
+
+## Istio
+
+After Installing Istioctl and Addons its pods will look like 
+### kubectl get pod -n istio-system
+
+![image](https://user-images.githubusercontent.com/3886381/211144670-d76a2c50-effe-4686-97f0-e28fe8a807fb.png)
+
+And its services will look like this
+### kubectl get svc -n istio-system
+
+![image](https://user-images.githubusercontent.com/3886381/211144715-4f24b04f-77e7-4506-bcef-155b91d7fbc0.png)
+
+## Kiali (Service Mesh Management for Istio)
+
+In order to access the same, we need to port forward the kiali like 
+### kubectl port-forward svc/kiali -n istio-system 20002:20001
+
+This will bring Kiali UI like 
+
+![image](https://user-images.githubusercontent.com/3886381/211145703-1c96806f-c9b6-41a4-8aaa-64ce47784590.png)
+
+## Kiali Workloads
+
+![image](https://user-images.githubusercontent.com/3886381/211145786-802b6080-227c-49b8-b7b1-6c9d271095c3.png)
+
+## Kiali Workload Overview
+
+![image](https://user-images.githubusercontent.com/3886381/211146477-5071ca5f-30a0-47a3-bebb-bc9a3db3881c.png)
+
+## Graphana Visualization
+
+![image](https://user-images.githubusercontent.com/3886381/211147911-88fd9853-cf3b-48d9-82e5-453ec0ab7fb2.png)

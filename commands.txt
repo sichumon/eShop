@@ -103,7 +103,6 @@ kubectl get po -n istio-system
 Enabling Istio
 kubectl label namespace default istio-injection=enabled
 
-Deleting kiali
-kubectl delete kiali --all --all-namespaces
-helm uninstall --namespace kiali-operator kiali-operator
-kubectl delete crd kialis.kiali.io
+//Applying Istio addons. Run the below command from istio folder
+
+kubectl apply -f samples/addons
