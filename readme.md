@@ -1,5 +1,16 @@
 # .Net Core Microservices using Clean Architecture Implementation
 
+### Installing
+Follow these steps to get your development environment set up: (Before Run Start the Docker Desktop)
+1. Clone the repository
+2. Once Docker for Desktop is installed, go to the **Settings > Advanced option**, from the Docker icon in the system tray, to configure the minimum amount of memory and CPU like so:
+* **Memory: 7 GB**
+* CPU: 5
+3. At the root directory which include **docker-compose.yml** files, run below command:
+```csharp
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+```
+
 ![image](https://user-images.githubusercontent.com/3886381/206482808-d3505e9f-c20b-4749-a56f-305b0285baf2.png)
 
 ![image](https://user-images.githubusercontent.com/3886381/206483689-ad757a3b-648c-4e9e-8f7c-33da66ab6a05.png)

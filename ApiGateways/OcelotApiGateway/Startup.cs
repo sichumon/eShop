@@ -16,8 +16,17 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services
+            .AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", policy =>
+                {
+                    //TODO read the same from settings for prod deployment
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+                });
+            })
             .AddOcelot()
             .AddCacheManager(c => c.WithDictionaryHandle());
+
         //Tracing setting
         // services.AddOpenTelemetryTracing((builder) =>
         // {
@@ -48,6 +57,7 @@ public class Startup
         }
 
         app.UseRouting();
+        app.UseCors("CorsPolicy");
 
         app.UseEndpoints(endpoints =>
         {
