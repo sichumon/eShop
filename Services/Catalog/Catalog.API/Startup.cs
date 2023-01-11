@@ -50,6 +50,8 @@ public class Startup
         }
 
         app.UseRouting();
+        
+        app.UseStaticFiles();
 
         app.UseAuthorization();
 
