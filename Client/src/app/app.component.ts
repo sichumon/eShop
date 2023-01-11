@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
+import { IProduct } from './shared/models/product';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,13 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'eShop';
-
-  constructor(private http: HttpClient){}
+  constructor(){}
   ngOnInit(): void {
-    this.http.get('http://localhost:9010/Catalog/GetProductsByCategoryName/Smart%20Phone').subscribe({
-      next:(res) => console.log(res),
-      error:(err) => console.log(err),
-      complete:() => console.log('completed')
-    })
+    
   }
 }
