@@ -8,6 +8,7 @@ import { ShopService } from './shop.service';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
+  
   products: IProduct[];
   constructor(private shopService: ShopService){
 

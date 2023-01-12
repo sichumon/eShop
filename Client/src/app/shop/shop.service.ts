@@ -13,4 +13,8 @@ export class ShopService {
   getProductsByCategory(){
     return this.http.get<IProduct[]>(this.baseUrl+'Catalog/GetProductsByCategoryName/Adidas');
   }
+
+  getProductById(id:string){
+    return this.http.get<IProduct>(this.baseUrl +'Catalog/GetProductById/' + id);
+  }
 }

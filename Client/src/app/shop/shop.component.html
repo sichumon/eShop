@@ -1,21 +1,25 @@
 <div class="container">
     <div class="row">
         <section class="col-3">
+            <h5 class="text-warning ml-3">Brands</h5>
+            <ul class="list-group my-3">
+                <li class="list-group-item active">Adidas</li>
+                <li class="list-group-item">Asics</li>
+                <li class="list-group-item">Victor</li>
+                <li class="list-group-item">Yonex</li>
+                <li class="list-group-item">Puma</li>
+                <li class="list-group-item">Babolat</li>
+                <li class="list-group-item">Nike</li>
+            </ul>
             <h5 class="text-warning ml-3">Category</h5>
             <ul class="list-group my-3">
-                <li class="list-group-item active">abc</li>
-                <li class="list-group-item">def</li>
-                <li class="list-group-item">ghi</li>
-                <li class="list-group-item">jkl</li>
-                <li class="list-group-item">mno</li>
-            </ul>
-            <h5 class="text-warning ml-3">Products</h5>
-            <ul class="list-group my-3">
-                <li class="list-group-item active">abc</li>
-                <li class="list-group-item">def</li>
-                <li class="list-group-item">ghi</li>
-                <li class="list-group-item">jkl</li>
-                <li class="list-group-item">mno</li>
+                <li class="list-group-item active">Shoes</li>
+                <li class="list-group-item">FootBall</li>
+                <li class="list-group-item">Racquet</li>
+                <li class="list-group-item">Ball</li>
+                <li class="list-group-item">Bottle</li>
+                <li class="list-group-item">Shocks</li>
+                <li class="list-group-item">Badminton</li>
             </ul>
         </section>
 
@@ -26,7 +30,7 @@
                 </header>
                 <div class="form-inline mt-2">
                     <input class="form-control mr-2" style="width: 300px" placeholder="Search" type="text">
-                    <button class="btn btn-outline-primary my-2">
+                    <button class="btn btn-outline-primary my-2" #search>
                         Search                    
                     </button>
                     <button class="btn btn-outline-primary ml-2 my-2">
@@ -36,7 +40,7 @@
             </div>
            
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col" *ngFor="let item of products">
+                <div class="col mb-4" *ngFor="let item of products">
                   <app-product-item [product]="item"></app-product-item>
                 </div>
               </div>
