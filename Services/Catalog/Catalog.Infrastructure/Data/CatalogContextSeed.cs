@@ -9,10 +9,12 @@ public class CatalogContextSeed
         public static void SeedData(IMongoCollection<Product> productCollection)
         {
             bool checkProducts = productCollection.Find(p => true).Any();
+            
+            string path = Path.Combine("Data", "SeedData", "products.json");
+            
             if (!checkProducts)
             {
-                //productCollection.InsertManyAsync(GetSeedProducts(productCollection));
-                var productsData = File.ReadAllText("../Catalog.Infrastructure/Data/SeedData/products.json");
+                var productsData = File.ReadAllText(path);
                 var products = JsonSerializer.Deserialize<List<Product>>(productsData);
                 if (products != null)
                 {

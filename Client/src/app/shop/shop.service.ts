@@ -11,6 +11,6 @@ export class ShopService {
   constructor(private http: HttpClient) { }
 
   getProductsByCategory(){
-    return this.http.get<IProduct[]>(this.baseUrl+'Catalog/GetProductsByCategoryName/Smart%20Phone');
+    return this.http.get<IProduct[]>(this.baseUrl+'Catalog/GetProductsByCategoryName/Adidas');
   }
 }
