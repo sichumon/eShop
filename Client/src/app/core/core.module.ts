@@ -4,6 +4,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { SectionHeaderComponent } from './section-header/section-header.component';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 
 
 
@@ -11,14 +13,17 @@ import { NotFoundComponent } from './not-found/not-found.component';
   declarations: [
     NavBarComponent,
     ServerErrorComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SectionHeaderComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    BreadcrumbModule
   ],
   exports: [
-    NavBarComponent
+    NavBarComponent,
+    SectionHeaderComponent
   ]
 })
 export class CoreModule { }
