@@ -26,6 +26,14 @@ public class Startup
     {
         services.AddControllers();
         services.AddApiVersioning();
+        services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy", policy =>
+            {
+                //TODO read the same from settings for prod deployment
+                policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+            });
+        });
         //Redis settings
         services.AddStackExchangeRedisCache(options =>
         {
@@ -71,6 +79,7 @@ public class Startup
         app.UseHttpsRedirection();
 
         app.UseRouting();
+        app.UseCors("CorsPolicy");
 
         app.UseAuthorization();
 

@@ -12,7 +12,7 @@ export class LoadingService {
     loading() {
       this.loadingReqCount++;
       this.spinnerService.show(undefined, {
-        type: 'pacman',
+        type: 'ball-pulse-sync',
         bdColor: 'rgba(255,255,255,0.7)',
         color: '#333333'
       });
