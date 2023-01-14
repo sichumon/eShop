@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { Basket, IBasket, IBasketItem } from '../shared/models/basket';
+import { Basket, IBasket, IBasketItem, IBasketTotals } from '../shared/models/basket';
 import { IProduct } from '../shared/models/product';
 
 @Injectable({
@@ -13,6 +13,8 @@ export class BasketService {
   private basketSource = new BehaviorSubject<IBasket>(null);
   //for public access like using async pipe to get the value
   basket$ = this.basketSource.asObservable();
+  private basketTotalSource = new BehaviorSubject<IBasketTotals>(null);
+  basketTotalSource$ = this.basketTotalSource.asObservable();
   constructor(private http: HttpClient) { }
 
   //TODO: This username it will pick from the identity service
@@ -21,6 +23,7 @@ export class BasketService {
       .pipe(
         map((basket: IBasket)=>{
           this.basketSource.next(basket);
+          this.calculateTotals();
           console.log('current basket value:- ')
           console.log(this.getCurrentBasketValue());
         })
@@ -36,6 +39,7 @@ export class BasketService {
         basket.items = res.items;
         basket.userName = res.userName;
         basket.totalPrice = res.totalPrice;
+        this.calculateTotals();
         console.log(`Basket after response:`);
         console.log(basket);
       },error:(err)=>{
@@ -66,6 +70,13 @@ export class BasketService {
     basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quantity);
     this.setBasket(basket);
   }
+  private calculateTotals(){
+    const currentBasket = this.getCurrentBasketValue();
+    //b==item, a== number returned from reduce function
+    //a initially set to 0
+    const total = currentBasket.items.reduce((a,b) => (b.price * b.quantity)+a,0);
+    this.basketTotalSource.next({total});
+  }
   private addOrUpdateItem(items: IBasketItem[], itemToAdd: IBasketItem, quantity: number): IBasketItem[] {
     console.log(items);
     const index = items.findIndex(i=>i.productId === itemToAdd.productId);
@@ -85,7 +96,7 @@ export class BasketService {
       productId: item.id,
       productName: item.name,
       price: item.price,
-      color: 'Red', //TODO: Remove this redundant prop
+      imageFile: item.imageFile,
       quantity
 
     }

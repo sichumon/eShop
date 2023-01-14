@@ -1,6 +1,6 @@
 export interface IBasketItem {
   quantity: number;
-  color: string;
+  imageFile: string;
   price: number;
   productId: string;
   productName: string;
@@ -16,4 +16,8 @@ export class Basket implements IBasket {
     userName: string;
     totalPrice: number;
     items: IBasketItem[] = [];
+ }
+
+ export interface IBasketTotals {
+    total: number;
  }

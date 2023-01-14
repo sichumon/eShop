@@ -49,7 +49,7 @@ public static class HostExtensions
             command.ExecuteNonQuery();
 
             command.CommandText = @"CREATE TABLE Coupon(Id SERIAL PRIMARY KEY, 
-                                                                ProductName VARCHAR(24) NOT NULL,
+                                                                ProductName VARCHAR(200) NOT NULL,
                                                                 Description TEXT,
                                                                 Amount INT)";
             command.ExecuteNonQuery();
