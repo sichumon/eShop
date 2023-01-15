@@ -9,7 +9,7 @@ image:
   repository: eshopacr.azurecr.io/catalogapi
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1"
+  tag: "v2"
 
 imagePullSecrets:
   - name: acr-secret

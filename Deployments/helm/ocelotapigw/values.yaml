@@ -5,12 +5,14 @@
 replicaCount: 1
 
 image:
-  repository: localhost:5000/ocelotapigw
+  registry: eshopacr.azurecr.io
+  repository: eshopacr.azurecr.io/ocelotapigw
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v3"
+  tag: "v1"
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: acr-secret
 nameOverride: ""
 fullnameOverride: "ocelotapigw"
 
@@ -37,7 +39,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
 
 ingress:

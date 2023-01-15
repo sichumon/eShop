@@ -30,6 +30,7 @@ if ($clean) {
 
 $infras = ("basketdb", "catalogdb", "discountdb", "elasticsearch", "kibana", "orderdb", "rabbitmq")
 $apis = ("basket","catalog", "ordering", "discount-grpc")
+$gateways = ("ocelotapigw")
 # $gateways = ("ocelotapigw", "shoppingaggregator")
 
 foreach ($infra in $infras) {
@@ -43,9 +44,9 @@ foreach ($api in $apis) {
     Install-Chart $api
 }
 
-# foreach ($chart in $gateways) {
-#     Write-Host "Installing Api Gateway Chart: $chart" -ForegroundColor Green
-#     Install-Chart $chart
-# }
+foreach ($chart in $gateways) {
+    Write-Host "Installing Api Gateway Chart: $chart" -ForegroundColor Green
+    Install-Chart $chart
+}
 
 Write-Host "helm charts installed." -ForegroundColor Green

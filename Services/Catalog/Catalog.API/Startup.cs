@@ -24,6 +24,14 @@ public class Startup
     {
         services.AddControllers();
         services.AddApiVersioning();
+        services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy", policy =>
+            {
+                //TODO read the same from settings for prod deployment
+                policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+            });
+        });
         services.AddHealthChecks()
             .AddMongoDb(Configuration["DatabaseSettings:ConnectionString"],
                 "Catalog Mongo Db Health Check",
@@ -50,6 +58,7 @@ public class Startup
         }
 
         app.UseRouting();
+        app.UseCors("CorsPolicy");
         
         app.UseStaticFiles();
 

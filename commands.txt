@@ -59,6 +59,9 @@ az aks get-credentials --admin --name eshopCluster --resource-group aks-rah-saha
 
 kubectl create secret docker-registry acr-secret --docker-server=eshopacr.azurecr.io --docker-username=eshopacr --docker-password=QkNSi1ykT+u6n7+oJxyoIvfS6kWjPzsLrTS8UgYunm+ACRCjZDrt --docker-email=rahulsahay19@gmail.com
 
+//ACR Login
+az acr login --name eshopacr
+
 kubectl apply -f mongo-secret.yaml
 kubectl apply -f mongo-configmap.yaml
 kubectl apply -f catalog-db.yaml 
