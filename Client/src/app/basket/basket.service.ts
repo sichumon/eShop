@@ -99,13 +99,13 @@ export class BasketService {
       if (basket.items.length > 0) {
         this.setBasket(basket);
       } else {
-        this.deleteBasket(basket);
+        this.deleteBasket(basket.userName);
       }
     }
   }
 
-  deleteBasket(basket: IBasket) {
-    return this.http.delete(this.baseUrl + '/Basket/DeleteBasket/' + basket.userName).subscribe ({
+  deleteBasket(userName) {
+    return this.http.delete(this.baseUrl + '/Basket/DeleteBasket/' + userName).subscribe ({
       next:(res)=>{
         this.basketSource.next(null);
         this.basketTotalSource.next(null);
