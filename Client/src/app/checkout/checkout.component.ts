@@ -10,7 +10,7 @@ export class CheckoutComponent implements OnInit {
   constructor(private basketService: BasketService){}
   ngOnInit() {
     //TODO: This will come from identity service
-    this.basketService.deleteBasket('rahul');
+    this.basketService.sendCheckout('rahul');
   }
 
 }
