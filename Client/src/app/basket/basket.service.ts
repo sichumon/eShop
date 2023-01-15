@@ -70,6 +70,53 @@ export class BasketService {
     basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quantity);
     this.setBasket(basket);
   }
+
+  incrementItemQuantity(item: IBasketItem) {
+    const basket = this.getCurrentBasketValue();
+    const foundItemIndex = basket.items.findIndex(x => x.productId === item.productId);
+    basket.items[foundItemIndex].quantity++;
+    this.setBasket(basket);
+  }
+
+  decrementItemQuantity(item: IBasketItem) {
+    debugger;
+    const basket = this.getCurrentBasketValue();
+    const foundItemIndex = basket.items.findIndex(x => x.productId === item.productId);
+    if (basket.items[foundItemIndex].quantity > 1) {
+      basket.items[foundItemIndex].quantity--;
+      this.setBasket(basket);
+    } else {
+      this.removeItemFromBasket(item);
+    }
+  }
+
+  removeItemFromBasket(item: IBasketItem) {
+    const basket = this.getCurrentBasketValue();
+    //this will return a boolean which matches this id
+    if (basket.items.some(x => x.productId === item.productId)) {
+      //then filterout the matching item and return the remaining
+      basket.items = basket.items.filter(x => x.productId !== item.productId)
+      if (basket.items.length > 0) {
+        this.setBasket(basket);
+      } else {
+        this.deleteBasket(basket);
+      }
+    }
+  }
+
+  deleteBasket(basket: IBasket) {
+    return this.http.delete(this.baseUrl + '/Basket/DeleteBasket/' + basket.userName).subscribe ({
+      next:(res)=>{
+        this.basketSource.next(null);
+        this.basketTotalSource.next(null);
+        localStorage.removeItem('basket_username');
+      },error:(err) => {
+        console.log('Error occurred while deleting the basket');
+        console.log(err);
+      }
+    });
+  }
+
   private calculateTotals(){
     const currentBasket = this.getCurrentBasketValue();
     //b==item, a== number returned from reduce function
