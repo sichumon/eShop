@@ -23,6 +23,7 @@
     "font-awesome": "^4.7.0",
     "ngx-bootstrap": "^6.2.0",
     "ngx-spinner": "^15.0.1",
+    "oidc-client": "^1.11.5",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "xng-breadcrumb": "^9.0.0",
