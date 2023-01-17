@@ -35,30 +35,32 @@ public class Config
             },
             new Client
             {
+                ClientName = "Angular Eshop",
+                ClientId = "eshopAngular",
+                AllowedGrantTypes = GrantTypes.Code,
+                AllowAccessTokensViaBrowser = true,
                 Enabled = true,
                 AccessTokenType = AccessTokenType.Jwt,
                 UpdateAccessTokenClaimsOnRefresh = true,
                 //required for angular localhost, else it will be blocked
-                AllowAccessTokensViaBrowser = true,
+                
                 AllowedCorsOrigins = {"http://localhost:4200"},
                 RequireClientSecret = false,
-                ClientName = "Angular Eshop",
-                ClientId = "eshopAngular",
-                AllowedGrantTypes = GrantTypes.Code,
+                
                 RequirePkce = true,
                 AllowRememberConsent = false,
                 RequireConsent = false,
-                
+                AccessTokenLifetime = 3600,
                 RedirectUris = new List<string>
                 {
-                    "https://localhost:4200/signin-callback",
-                    "https://localhost:4200/assets/silent-callback.html",
-                    "https://localhost:5002/signin-oidc"
+                    "http://localhost:4200/signin-callback",
+                    "http://localhost:4200/assets/silent-callback.html",
+                    "https://localhost:9009/signin-oidc"
                 },
                 PostLogoutRedirectUris = new List<string>
                 {
-                    "https://localhost:4200/signout-callback",
-                    "https://localhost:5002/signout-callback-oidc"
+                    "http://localhost:4200/signout-callback",
+                   "https://localhost:9009/signout-callback-oidc"
                 },
                 ClientSecrets = new List<Secret>
                 {
@@ -67,7 +69,8 @@ public class Config
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
-                    IdentityServerConstants.StandardScopes.Profile
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.Email
                 }
             }
         };
@@ -106,6 +109,36 @@ public class Config
                 {
                     new Claim(JwtClaimTypes.GivenName, "rahul"),
                     new Claim(JwtClaimTypes.FamilyName, "sahay")
+                }
+            },
+            new TestUser
+            {
+                SubjectId = "a9ea0f25-b964-409f-bcce-c923266249b4",
+                Username = "Mick",
+                Password = "MickPassword",
+                Claims = new List<Claim>
+                {
+                    new Claim("given_name", "Mick"),
+                    new Claim("family_name", "Mining"),
+                    new Claim("address", "Sunny Street 4"),
+                    new Claim("role", "Admin"),
+                    new Claim("position", "Administrator"), 
+                    new Claim("country", "USA")
+                }
+            },
+            new TestUser
+            {
+                SubjectId = "c95ddb8c-79ec-488a-a485-fe57a1462340",
+                Username = "Jane",
+                Password = "JanePassword",
+                Claims = new List<Claim>
+                {
+                    new Claim("given_name", "Jane"),
+                    new Claim("family_name", "Downing"),
+                    new Claim("address", "Long Avenue 289"),
+                    new Claim("role", "Visitor"),
+                    new Claim("position", "Viewer"),
+                    new Claim("country", "USA")
                 }
             }
         };

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-signin-redirect-callback',
@@ -8,11 +8,12 @@ import { Router } from '@angular/router';
 })
 export class SigninRedirectCallbackComponent implements OnInit {
 
-  constructor(private _authService: AuthService, private _router: Router) { }
+  constructor(private _authService: AccountService, private _router: Router) { }
 
   ngOnInit(): void {
     this._authService.finishLogin()
     .then(_ => {
+      console.log('inside finish login');
       this._router.navigate(['/'], { replaceUrl: true });
     })
   }

@@ -19,7 +19,11 @@ namespace IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddIdentityServer()
+            services.AddIdentityServer(options =>
+                {
+                    options.Authentication.CookieSameSiteMode = SameSiteMode.Lax;
+                   // options.IssuerUri = "https://localhost:9009";
+                })
                 .AddInMemoryClients(Config.Clients)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryIdentityResources(Config.IdentityResources)
