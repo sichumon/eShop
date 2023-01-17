@@ -131,7 +131,6 @@ export class BasketService {
   }
 
   decrementItemQuantity(item: IBasketItem) {
-    debugger;
     const basket = this.getCurrentBasketValue();
     const foundItemIndex = basket.items.findIndex(
       (x) => x.productId === item.productId

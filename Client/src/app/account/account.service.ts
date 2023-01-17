@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { User, UserManager, UserManagerSettings } from 'oidc-client';
-import { BehaviorSubject, catchError, Observable, Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
+import { BasketService } from '../basket/basket.service';
 import { BaseService } from './base.service';
 import { Constants } from './constants';
 
@@ -15,6 +16,11 @@ export class AccountService extends BaseService {
 
   public loginChanged = this._loginChangedSubject.asObservable();
 
+  // We need to have something which won't emit initial value rather wait till it has something.
+  // Hence for that ReplaySubject. I have given to hold one user object and it will cache this as well
+  private currentUserSource = new ReplaySubject<any>(1);
+  currentUser$ = this.currentUserSource.asObservable();
+
   private get idpSettings() : UserManagerSettings {
     return {
       authority: Constants.idpAuthority,
@@ -26,7 +32,7 @@ export class AccountService extends BaseService {
     }
   }
 
-  constructor() {
+  constructor(private basketService: BasketService, private router: Router) {
     super();
     this._userManager = new UserManager(this.idpSettings);
   }
@@ -34,6 +40,9 @@ export class AccountService extends BaseService {
   public login = () => {
     console.log('usermanager');
     console.log(this._userManager);
+    this.currentUserSource.next('rahul');
+    this.basketService.sendCheckout('rahul');
+   // this.router.navigateByUrl('/checkout');
     return this._userManager.signinRedirect();
   }
 
