@@ -41,7 +41,7 @@ export class AccountService extends BaseService {
     console.log('usermanager');
     console.log(this._userManager);
     this.currentUserSource.next('rahul');
-    this.basketService.sendCheckout('rahul');
+  //  this.basketService.sendCheckout('rahul');
    // this.router.navigateByUrl('/checkout');
     return this._userManager.signinRedirect();
   }

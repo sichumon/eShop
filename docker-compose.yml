@@ -46,6 +46,12 @@ services:
       context: .
       dockerfile: Services/Ordering/Ordering.API/Dockerfile
       
+#  identityserver:
+#    image: ${DOCKER_REGISTRY-}identityserver
+#    build:
+#      context: .
+#      dockerfile: Services/IdentityServer/Dockerfile
+      
   ocelotapigw:
     image: ${DOCKER_REGISTRY-}ocelotapigw
     build:
@@ -56,7 +62,7 @@ services:
     image: ${DOCKER_REGISTRY-}shoppingaggregator
     build:
       context: .
-      dockerfile: ApiGateways/Shopping.Aggregator/Dockerfile
+      dockerfile: ApiGateways/Shopping.Aggregator/Dockerfile  
       
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
