@@ -1,8 +1,3 @@
-using System.Reflection;
-using System.Reflection.Metadata;
-using IdentityServer4.Models;
-using IdentityServer4.Test;
-
 namespace IdentityServer
 {
     public class Startup

@@ -39,6 +39,16 @@ public class CatalogController : ApiController
     }
     
     [HttpGet]
+    [Route("GetAllProducts")]
+    [ProducesResponseType(typeof(IList<ProductResponse>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IList<ProductResponse>>> GetAllProducts()
+    {
+        var query = new GetAllProductsQuery();
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+    
+    [HttpGet]
     [Route("[action]/{category}", Name = "GetProductsByCategoryName")]
     [ProducesResponseType(typeof(IList<ProductResponse>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IList<ProductResponse>>> GetProductsByCategoryName(string category)
