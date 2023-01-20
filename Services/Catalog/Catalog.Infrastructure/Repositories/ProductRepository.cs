@@ -39,9 +39,9 @@ public class ProductRepository : IProductRepository
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Product>> GetProductByCategory(string categoryName)
+    public async Task<IEnumerable<Product>> GetProductByBrand(string brandName)
     {
-        FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Category, categoryName);
+        FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Brands.Name, brandName);
         return await _context
             .Products
             .Find(filter)

@@ -27,7 +27,7 @@
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
     },
     {
-      "DownstreamPathTemplate": "/api/v1/Catalog/GetProductsByCategoryName/{category}",
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -35,7 +35,19 @@
           "Port": "9000"
         }
       ],
-      "UpstreamPathTemplate": "/Catalog/GetProductsByCategoryName/{category}",
+      "UpstreamPathTemplate": "/Catalog/GetAllProducts",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetProductsByBrandName/{brand}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": "9000"
+        }
+      ],
+      "UpstreamPathTemplate": "/Catalog/GetProductsByBrandName/{brand}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     //Basket API

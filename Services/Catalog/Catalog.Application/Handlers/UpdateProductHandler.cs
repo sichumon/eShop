@@ -18,12 +18,13 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, bool>
         var movieEntity = await _productRepository.UpdateProduct(new Product
         {
             Id = request.Id,
-            Category = request.Category,
             Description = request.Description,
             ImageFile = request.ImageFile,
             Name = request.Name,
             Price = request.Price,
-            Summary = request.Summary
+            Summary = request.Summary,
+            Brands = request.Brands,
+            Types = request.Types
         });
         return movieEntity;
     }
