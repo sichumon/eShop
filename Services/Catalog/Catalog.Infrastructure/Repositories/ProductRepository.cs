@@ -15,38 +15,73 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
         _context = context ?? throw new ArgumentNullException();
     }
 
-    public async Task<IEnumerable<Product>> GetProducts(CatalogSpecParams catalogSpecParams)
+    public async Task<Pagination<Product>> GetProducts(CatalogSpecParams catalogSpecParams)
     {
         if (!string.IsNullOrEmpty(catalogSpecParams.Sort))
         {
             switch (catalogSpecParams.Sort)
             {
                 case "priceAsc":
-                    return await _context
-                        .Products
-                        .Find(p => true)
-                        .Sort(Builders<Product>.Sort.Ascending("Price"))
-                        .ToListAsync();
+                    return new Pagination<Product>
+                    {
+                        PageSize = catalogSpecParams.PageSize,
+                        PageIndex = catalogSpecParams.PageIndex,
+                        Data = await _context
+                            .Products
+                            .Find(p => true)
+                            .Sort(Builders<Product>.Sort.Ascending("Price"))
+                            .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
+                            .Limit(catalogSpecParams.PageSize)
+                            .ToListAsync(),
+                            Count = 0
+                    };
                 case "priceDesc":
-                    return await _context
-                        .Products
-                        .Find(p => true)
-                        .Sort(Builders<Product>.Sort.Descending("Price"))
-                        .ToListAsync();
+                    return new Pagination<Product>
+                    {
+                        PageSize = catalogSpecParams.PageSize,
+                        PageIndex = catalogSpecParams.PageIndex,
+                        Data = await _context
+                            .Products
+                            .Find(p => true)
+                            .Sort(Builders<Product>.Sort.Descending("Price"))
+                            .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
+                            .Limit(catalogSpecParams.PageSize)
+                            .ToListAsync(),
+                        Count = 0
+                    };
                 default:
-                    return await _context
-                        .Products
-                        .Find(p => true)
-                        .Sort(Builders<Product>.Sort.Ascending("Name"))
-                        .ToListAsync();
+                    return new Pagination<Product>
+                    {
+                        PageSize = catalogSpecParams.PageSize,
+                        PageIndex = catalogSpecParams.PageIndex,
+                        Data = await _context
+                            .Products
+                            .Find(p => true)
+                            .Sort(Builders<Product>.Sort.Ascending("Name"))
+                            .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
+                            .Limit(catalogSpecParams.PageSize)
+                            .ToListAsync(),
+                        Count = 0
+                    };
             }
         }
-        return await _context
-            .Products
-            .Find(p => true)
-            .Sort(Builders<Product>.Sort.Ascending("Name"))
-            .ToListAsync();
-    }
+
+        return new Pagination<Product>
+        {
+            PageSize = catalogSpecParams.PageSize,
+            PageIndex = catalogSpecParams.PageIndex,
+            Data = await _context
+                .Products
+                .Find(p => true)
+                .Sort(Builders<Product>.Sort.Ascending("Name"))
+                .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
+                .Limit(catalogSpecParams.PageSize)
+                .ToListAsync(),
+            Count = 0
+        
+        };
+    } 
+    
     
     public async Task<IEnumerable<ProductBrand>> GetAllBrands()
     {

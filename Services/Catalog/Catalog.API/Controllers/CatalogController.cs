@@ -40,11 +40,12 @@ public class CatalogController : ApiController
     
     [HttpGet]
     [Route("GetAllProducts")]
-    [ProducesResponseType(typeof(IList<ProductResponse>), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<IList<ProductResponse>>> GetAllProducts([FromQuery]CatalogSpecParams catalogSpecParams)
+    [ProducesResponseType(typeof(Pagination<ProductResponse>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<Pagination<ProductResponse>>> GetAllProducts([FromQuery]CatalogSpecParams catalogSpecParams)
     {
         var query = new GetAllProductsQuery(catalogSpecParams);
         var result = await _mediator.Send(query);
+        result.Count = result.Data.Count;
         return Ok(result);
     }
     
