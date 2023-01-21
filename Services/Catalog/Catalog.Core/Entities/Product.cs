@@ -3,11 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Catalog.Core.Entities;
 
-public class Product
+public class Product : BaseEntity
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; }
     [BsonElement("Name")]
     public string Name { get; set; }
     public string Summary { get; set; }
@@ -15,6 +12,7 @@ public class Product
     public string ImageFile { get; set; }
     public ProductBrand Brands { get; set; }
     public ProductType Types { get; set; }
+    [BsonRepresentation(BsonType.Decimal128)]
     public decimal Price { get; set; }
     
 }

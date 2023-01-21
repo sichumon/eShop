@@ -3,11 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Catalog.Core.Entities;
 
-public class ProductBrand
+public class ProductBrand : BaseEntity
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; }
     [BsonElement("Name")]
     public string Name { get; set; }
 }

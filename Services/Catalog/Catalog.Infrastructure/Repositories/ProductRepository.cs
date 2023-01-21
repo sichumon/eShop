@@ -1,6 +1,7 @@
 using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Catalog.Infrastructure.Repositories;
@@ -14,11 +15,36 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
         _context = context ?? throw new ArgumentNullException();
     }
 
-    public async Task<IEnumerable<Product>> GetProducts()
+    public async Task<IEnumerable<Product>> GetProducts(string sort)
     {
+        if (!string.IsNullOrEmpty(sort))
+        {
+            switch (sort)
+            {
+                case "priceAsc":
+                    return await _context
+                        .Products
+                        .Find(p => true)
+                        .Sort(Builders<Product>.Sort.Ascending("Price"))
+                        .ToListAsync();
+                case "priceDesc":
+                    return await _context
+                        .Products
+                        .Find(p => true)
+                        .Sort(Builders<Product>.Sort.Descending("Price"))
+                        .ToListAsync();
+                default:
+                    return await _context
+                        .Products
+                        .Find(p => true)
+                        .Sort(Builders<Product>.Sort.Ascending("Name"))
+                        .ToListAsync();
+            }
+        }
         return await _context
             .Products
             .Find(p => true)
+            .Sort(Builders<Product>.Sort.Ascending("Name"))
             .ToListAsync();
     }
     
