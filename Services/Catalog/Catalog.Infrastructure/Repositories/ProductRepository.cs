@@ -17,6 +17,26 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
 
     public async Task<Pagination<Product>> GetProducts(CatalogSpecParams catalogSpecParams)
     {
+        var builder = Builders<Product>.Filter;
+        var filter = builder.Empty;
+        //TODO: Search Pending
+        // if (!string.IsNullOrEmpty(catalogSpecParams.Search))
+        // {
+        //     
+        //     var searchFilter = builder.AnyIn(x => x.Name, catalogSpecParams.Search.ToLower());
+        //     filter &= searchFilter;
+        // }
+        if (!string.IsNullOrEmpty(catalogSpecParams.BrandId))
+        {
+            var brandFilter = builder.Eq(x => x.Brands.Id, catalogSpecParams.BrandId);
+            filter &= brandFilter;
+        }
+        if (!string.IsNullOrEmpty(catalogSpecParams.TypeId))
+        {
+            var typeFilter = builder.Eq(x => x.Types.Id, catalogSpecParams.TypeId);
+            filter &= typeFilter;
+        }
+        
         if (!string.IsNullOrEmpty(catalogSpecParams.Sort))
         {
             switch (catalogSpecParams.Sort)
@@ -28,7 +48,7 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
                         PageIndex = catalogSpecParams.PageIndex,
                         Data = await _context
                             .Products
-                            .Find(p => true)
+                            .Find(filter)
                             .Sort(Builders<Product>.Sort.Ascending("Price"))
                             .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
                             .Limit(catalogSpecParams.PageSize)
@@ -42,7 +62,7 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
                         PageIndex = catalogSpecParams.PageIndex,
                         Data = await _context
                             .Products
-                            .Find(p => true)
+                            .Find(filter)
                             .Sort(Builders<Product>.Sort.Descending("Price"))
                             .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
                             .Limit(catalogSpecParams.PageSize)
@@ -56,7 +76,7 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
                         PageIndex = catalogSpecParams.PageIndex,
                         Data = await _context
                             .Products
-                            .Find(p => true)
+                            .Find(filter)
                             .Sort(Builders<Product>.Sort.Ascending("Name"))
                             .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
                             .Limit(catalogSpecParams.PageSize)
@@ -72,7 +92,7 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
             PageIndex = catalogSpecParams.PageIndex,
             Data = await _context
                 .Products
-                .Find(p => true)
+                .Find(filter)
                 .Sort(Builders<Product>.Sort.Ascending("Name"))
                 .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
                 .Limit(catalogSpecParams.PageSize)
