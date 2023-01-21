@@ -1,7 +1,7 @@
 using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
+using Catalog.Core.Specs;
 using Catalog.Infrastructure.Data;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Catalog.Infrastructure.Repositories;
@@ -15,11 +15,11 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
         _context = context ?? throw new ArgumentNullException();
     }
 
-    public async Task<IEnumerable<Product>> GetProducts(string sort)
+    public async Task<IEnumerable<Product>> GetProducts(CatalogSpecParams catalogSpecParams)
     {
-        if (!string.IsNullOrEmpty(sort))
+        if (!string.IsNullOrEmpty(catalogSpecParams.Sort))
         {
-            switch (sort)
+            switch (catalogSpecParams.Sort)
             {
                 case "priceAsc":
                     return await _context

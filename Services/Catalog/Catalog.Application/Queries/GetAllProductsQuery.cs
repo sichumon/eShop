@@ -1,14 +1,16 @@
 using Catalog.Application.Responses;
+using Catalog.Core.Specs;
 using MediatR;
 
 namespace Catalog.Application.Queries;
 
 public class GetAllProductsQuery : IRequest<IList<ProductResponse>>
 {
-    public string Sort { get; set; }
+    
+    public CatalogSpecParams CatalogSpecParams { get; set; }
 
-    public GetAllProductsQuery(string sort)
+    public GetAllProductsQuery(CatalogSpecParams catalogSpecParams)
     {
-        Sort = sort;
+        CatalogSpecParams = catalogSpecParams;
     }
 }
