@@ -49,6 +49,26 @@ public class CatalogController : ApiController
     }
     
     [HttpGet]
+    [Route("GetAllBrands")]
+    [ProducesResponseType(typeof(IList<BrandResponse>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IList<BrandResponse>>> GetAllBrands()
+    {
+        var query = new GetAllBrandsQuery();
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+    
+    [HttpGet]
+    [Route("GetAllTypes")]
+    [ProducesResponseType(typeof(IList<TypesResponse>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IList<TypesResponse>>> GetAllTypes()
+    {
+        var query = new GetAllTypesQuery();
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+    
+    [HttpGet]
     [Route("[action]/{brand}", Name = "GetProductsByBrandName")]
     [ProducesResponseType(typeof(IList<ProductResponse>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IList<ProductResponse>>> GetProductsByBrandName(string brand)

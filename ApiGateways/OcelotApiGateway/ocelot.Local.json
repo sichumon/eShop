@@ -62,6 +62,30 @@
       "UpstreamPathTemplate": "/Catalog/GetAllProducts",
       "UpstreamHttpMethod": [ "GET" ]
     },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetAllBrands",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Catalog/GetAllBrands",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetAllTypes",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Catalog/GetAllTypes",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
     //Basket API
     {
       "DownstreamPathTemplate": "/api/v1/Basket/{userName}",

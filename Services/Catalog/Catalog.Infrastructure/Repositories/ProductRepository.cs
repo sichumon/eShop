@@ -5,7 +5,7 @@ using MongoDB.Driver;
 
 namespace Catalog.Infrastructure.Repositories;
 
-public class ProductRepository : IProductRepository
+public class ProductRepository : IProductRepository, IBrandRepository, ITypesRepository
 {
     private readonly ICatalogContext _context;
 
@@ -18,6 +18,22 @@ public class ProductRepository : IProductRepository
     {
         return await _context
             .Products
+            .Find(p => true)
+            .ToListAsync();
+    }
+    
+    public async Task<IEnumerable<ProductBrand>> GetAllBrands()
+    {
+        return await _context
+            .Brands
+            .Find(p => true)
+            .ToListAsync();
+    }
+    
+    public async Task<IEnumerable<ProductType>> GetAllTypes()
+    {
+        return await _context
+            .Types
             .Find(p => true)
             .ToListAsync();
     }

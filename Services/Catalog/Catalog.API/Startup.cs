@@ -46,6 +46,8 @@ public class Startup
         //DI
         services.AddScoped<ICatalogContext, CatalogContext>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IBrandRepository, ProductRepository>();
+        services.AddScoped<ITypesRepository, ProductRepository>();
     }
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
