@@ -47,7 +47,7 @@
           "Port": "9000"
         }
       ],
-      "UpstreamPathTemplate": "/Catalog/GetAllTypes",
+      "UpstreamPathTemplate": "/Catalog/GetAllBrands",
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
     },
     {
@@ -59,7 +59,7 @@
           "Port": "9000"
         }
       ],
-      "UpstreamPathTemplate": "/Catalog/GetAllBrands",
+      "UpstreamPathTemplate": "/Catalog/GetAllTypes",
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
     },
     {

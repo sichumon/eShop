@@ -20,7 +20,6 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
     {
         var builder = Builders<Product>.Filter;
         var filter = builder.Empty;
-        //TODO: Search Pending
         if (!string.IsNullOrEmpty(catalogSpecParams.Search))
         {
             var searchFilter = builder.Regex(x => x.Name, new BsonRegularExpression(catalogSpecParams.Search));
