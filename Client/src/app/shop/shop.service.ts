@@ -8,46 +8,59 @@ import { ShopParams } from '../shared/models/shopParams';
 import { IType } from '../shared/models/type';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShopService {
   baseUrl = 'http://localhost:9010/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getAllProducts(shopParams: ShopParams){
+  getAllProducts(shopParams: ShopParams) {
     let params = new HttpParams();
-    if(shopParams.brandId){
+    if (shopParams.brandId) {
       params = params.append('brandId', shopParams.brandId);
     }
 
-    if(shopParams.typeId){
+    if (shopParams.typeId) {
       params = params.append('typeId', shopParams.typeId);
     }
-    if(shopParams.sort){
-      params = params.append('sort', shopParams.sort);
-    }
 
-    return this.http.get<IPagination>(this.baseUrl+'Catalog/GetAllProducts', {observe:'response', params})
-    //projecting HttpResponse body back
-    .pipe(map(response =>{
-      return response.body
-    }));
+    params = params.append('sort', shopParams.sort);
+    params = params.append('pageIndex', shopParams.pageNumber.toString());
+    params = params.append('pageSize', shopParams.pageSize.toString());
+
+    return (
+      this.http
+        .get<IPagination>(this.baseUrl + 'Catalog/GetAllProducts', {
+          observe: 'response',
+          params,
+        })
+        //projecting HttpResponse body back
+        .pipe(
+          map((response) => {
+            return response.body;
+          })
+        )
+    );
   }
 
-  getBrands(){
-    return this.http.get<IBrand[]>(this.baseUrl+'Catalog/GetAllBrands')
+  getBrands() {
+    return this.http.get<IBrand[]>(this.baseUrl + 'Catalog/GetAllBrands');
   }
 
-  getTypes(){
-    return this.http.get<IType[]>(this.baseUrl+'Catalog/GetAllTypes')
+  getTypes() {
+    return this.http.get<IType[]>(this.baseUrl + 'Catalog/GetAllTypes');
   }
 
-  getProductsByCategory(){
-    return this.http.get<IProduct[]>(this.baseUrl+'Catalog/GetProductsByCategoryName/Adidas');
+  getProductsByCategory() {
+    return this.http.get<IProduct[]>(
+      this.baseUrl + 'Catalog/GetProductsByCategoryName/Adidas'
+    );
   }
 
-  getProductById(id:string){
-    return this.http.get<IProduct>(this.baseUrl +'Catalog/GetProductById/' + id);
+  getProductById(id: string) {
+    return this.http.get<IProduct>(
+      this.baseUrl + 'Catalog/GetProductById/' + id
+    );
   }
 }

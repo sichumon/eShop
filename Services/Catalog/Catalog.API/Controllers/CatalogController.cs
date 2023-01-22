@@ -45,7 +45,6 @@ public class CatalogController : ApiController
     {
         var query = new GetAllProductsQuery(catalogSpecParams);
         var result = await _mediator.Send(query);
-        result.Count = result.Data.Count;
         return Ok(result);
     }
     

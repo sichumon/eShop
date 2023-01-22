@@ -36,10 +36,11 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
             filter &= typeFilter;
         }
         
+        var prodCount = _context.Products.CountDocuments(p => true);
         if (!string.IsNullOrEmpty(catalogSpecParams.Sort))
         {
             switch (catalogSpecParams.Sort)
-            {
+            { 
                 case "priceAsc":
                     return new Pagination<Product>
                     {
@@ -52,7 +53,7 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
                             .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
                             .Limit(catalogSpecParams.PageSize)
                             .ToListAsync(),
-                            Count = 0
+                            Count = prodCount
                     };
                 case "priceDesc":
                     return new Pagination<Product>
@@ -66,7 +67,7 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
                             .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
                             .Limit(catalogSpecParams.PageSize)
                             .ToListAsync(),
-                        Count = 0
+                        Count = prodCount
                     };
                 default:
                     return new Pagination<Product>
@@ -80,7 +81,7 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
                             .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
                             .Limit(catalogSpecParams.PageSize)
                             .ToListAsync(),
-                        Count = 0
+                        Count = prodCount
                     };
             }
         }
@@ -96,7 +97,7 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
                 .Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1))
                 .Limit(catalogSpecParams.PageSize)
                 .ToListAsync(),
-            Count = 0
+            Count = prodCount
         
         };
     } 
