@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IBrand } from '../shared/models/brand';
 import { IProduct } from '../shared/models/product';
+import { ShopParams } from '../shared/models/shopParams';
 import { IType } from '../shared/models/type';
 import { ShopService } from './shop.service';
 
@@ -17,6 +18,7 @@ export class ShopComponent implements OnInit {
   brandIdSelected: string = '';
   typeIdSelected: string = '';
   sortSelected = 'name';
+  shopParams = new ShopParams();
   sortOptions = [
     { name: 'Alphabetical', value: 'name' },
     { name: 'Price: Ascending', value: 'priceAsc' },
@@ -34,7 +36,7 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts(){
-    this.shopService.getAllProducts(this.brandIdSelected, this.typeIdSelected, this.sortSelected).subscribe({
+    this.shopService.getAllProducts(this.shopParams).subscribe({
       next:(res)=>{
         this.products = res.data;
         console.log('inside getProducts')
@@ -68,18 +70,18 @@ export class ShopComponent implements OnInit {
   }
 
   onBrandSelected(brandId:string){
-    this.brandIdSelected = brandId;
+    this.shopParams.brandId = brandId;
     this.getProducts();
   }
 
   onTypeSelected(typeId:string){
-    this.typeIdSelected = typeId;
+    this.shopParams.typeId = typeId;
     this.getProducts();
   }
 
   onSortSelected(sort:string){
     console.log('inside onSortSelected');
-    this.sortSelected = sort;
+    this.shopParams.sort = sort;
     console.log(this.sortSelected);
     this.getProducts();
   }
