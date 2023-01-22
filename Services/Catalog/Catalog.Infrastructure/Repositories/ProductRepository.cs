@@ -2,6 +2,7 @@ using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
 using Catalog.Core.Specs;
 using Catalog.Infrastructure.Data;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Catalog.Infrastructure.Repositories;
@@ -20,12 +21,11 @@ public class ProductRepository : IProductRepository, IBrandRepository, ITypesRep
         var builder = Builders<Product>.Filter;
         var filter = builder.Empty;
         //TODO: Search Pending
-        // if (!string.IsNullOrEmpty(catalogSpecParams.Search))
-        // {
-        //     
-        //     var searchFilter = builder.AnyIn(x => x.Name, catalogSpecParams.Search.ToLower());
-        //     filter &= searchFilter;
-        // }
+        if (!string.IsNullOrEmpty(catalogSpecParams.Search))
+        {
+            var searchFilter = builder.Regex(x => x.Name, new BsonRegularExpression(catalogSpecParams.Search));
+            filter &= searchFilter;
+        }
         if (!string.IsNullOrEmpty(catalogSpecParams.BrandId))
         {
             var brandFilter = builder.Eq(x => x.Brands.Id, catalogSpecParams.BrandId);
